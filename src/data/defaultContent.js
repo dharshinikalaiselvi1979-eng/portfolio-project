@@ -23,7 +23,7 @@ export const defaultProjects = [
       'get smart spending alerts and weekly expense analytics, and sign in securely with JWT authentication or Google. ' +
       'The responsive UI works across all devices.',
     technologies: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'JWT'],
-    link: 'https://github.com/dharshinikalaiselvi1979-eng/Fin-AI',
+    link: 'https://fin-ai-ochre.vercel.app/',
     image: '/uploads/finai.webp'
   },
   {
@@ -36,7 +36,7 @@ export const defaultProjects = [
       'roadmap and recommended courses and projects, and includes a mentor chatbot for guidance. Includes ' +
       'user login with roles and an admin area for managing questions, viewing analytics and exporting data.',
     technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Supabase', 'Framer Motion', 'Recharts'],
-    link: 'https://github.com/dharshinikalaiselvi1979-eng/CAREER-COMPASS-GUIDE',
+    link: 'https://timely-strudel-f0da0d.netlify.app/',
     image: '/uploads/careercompass.webp'
   },
   {
