@@ -55,7 +55,7 @@ export default function Navbar() {
         <div className="flex items-center space-x-3">
           {/* Admin CMS Portal Link */}
           <a
-            href="http://localhost:3001"
+            href={process.env.REACT_APP_ADMIN_URL || 'http://localhost:3001'}
             target="_blank"
             rel="noreferrer"
             className="text-xs font-semibold px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:opacity-90 shadow-sm transition flex items-center gap-1.5"
