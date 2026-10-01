@@ -2,11 +2,22 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SEO from '../components/SEO';
 import { CardSkeleton } from '../components/Skeleton';
+import { defaultSkills } from '../data/defaultContent';
+
+const groupSkills = (list) => {
+  const grouped = {};
+  list.forEach((skill) => {
+    const cat = skill.category || 'General';
+    if (!grouped[cat]) grouped[cat] = [];
+    grouped[cat].push(skill);
+  });
+  return grouped;
+};
 
 export default function Skills() {
-  const [skills, setSkills] = useState([]);
-  const [categories, setCategories] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [skills, setSkills] = useState(defaultSkills);
+  const [categories, setCategories] = useState(() => groupSkills(defaultSkills));
+  const [loading, setLoading] = useState(false);
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
@@ -16,19 +27,12 @@ export default function Skills() {
   const fetchSkills = async () => {
     try {
       const res = await axios.get(`${API_URL}/api/content/skills`);
-      setSkills(res.data);
-
-      const grouped = {};
-      res.data.forEach(skill => {
-        const cat = skill.category || 'General';
-        if (!grouped[cat]) grouped[cat] = [];
-        grouped[cat].push(skill);
-      });
-      setCategories(grouped);
+      if (Array.isArray(res.data) && res.data.length > 0) {
+        setSkills(res.data);
+        setCategories(groupSkills(res.data));
+      }
     } catch (err) {
-      console.error('Error fetching skills', err);
-    } finally {
-      setLoading(false);
+      console.log('Using default skills content');
     }
   };
 

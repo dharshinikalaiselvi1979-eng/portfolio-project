@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SEO from '../components/SEO';
+import { defaultExperience } from '../data/defaultContent';
 
 export default function Experience() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [items, setItems] = useState(defaultExperience);
+  const [loading, setLoading] = useState(false);
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     axios.get(`${API_URL}/api/content/experience`)
-      .then((res) => setItems(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => console.error('Error fetching experience', err))
-      .finally(() => setLoading(false));
+      .then((res) => {
+        if (Array.isArray(res.data) && res.data.length > 0) {
+          setItems(res.data);
+        }
+      })
+      .catch(() => console.log('Using default experience content'));
   }, [API_URL]);
 
   return (

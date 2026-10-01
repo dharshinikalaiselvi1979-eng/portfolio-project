@@ -4,16 +4,22 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import SocialLinks from '../components/SocialLinks';
+import {
+  defaultAbout,
+  defaultProjects,
+  defaultServices,
+  defaultTestimonials
+} from '../data/defaultContent';
 
 export default function Home() {
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
-  const [about, setAbout] = useState(null);
-  const [projects, setProjects] = useState([]);
-  const [services, setServices] = useState([]);
-  const [testimonials, setTestimonials] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [about, setAbout] = useState(defaultAbout);
+  const [projects, setProjects] = useState(defaultProjects);
+  const [services, setServices] = useState(defaultServices);
+  const [testimonials, setTestimonials] = useState(defaultTestimonials);
+  const [loading, setLoading] = useState(false);
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
@@ -36,20 +42,20 @@ export default function Home() {
         axios.get(`${API_URL}/api/content/services`).catch(() => ({ data: [] })),
         axios.get(`${API_URL}/api/content/testimonials`).catch(() => ({ data: [] }))
       ]);
-      setAbout(aboutRes.data);
-      if (Array.isArray(projectsRes.data)) {
+      if (aboutRes.data && aboutRes.data.title) {
+        setAbout(aboutRes.data);
+      }
+      if (Array.isArray(projectsRes.data) && projectsRes.data.length > 0) {
         setProjects(projectsRes.data.slice(0, 6));
       }
-      if (Array.isArray(servRes.data)) {
+      if (Array.isArray(servRes.data) && servRes.data.length > 0) {
         setServices(servRes.data);
       }
-      if (Array.isArray(testRes.data)) {
+      if (Array.isArray(testRes.data) && testRes.data.length > 0) {
         setTestimonials(testRes.data);
       }
-      setLoading(false);
     } catch (err) {
-      console.error('Could not load home content', err);
-      setLoading(false);
+      console.log('Using default home content');
     }
   };
 

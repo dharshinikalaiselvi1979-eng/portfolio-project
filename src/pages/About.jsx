@@ -2,15 +2,13 @@ import { mediaUrl } from '../utils/media';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SocialLinks from '../components/SocialLinks';
+import { defaultAbout } from '../data/defaultContent';
 
 export default function About() {
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
-  const [about, setAbout] = useState({
-    title: 'Full-Stack Developer',
-    description: 'Full-stack developer building web apps end to end, from database and API to the interface.',
-  });
+  const [about, setAbout] = useState(defaultAbout);
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
@@ -20,9 +18,9 @@ export default function About() {
   const fetchAbout = async () => {
     try {
       const res = await axios.get(`${API_URL}/api/content/about`);
-      if (res.data) setAbout(res.data);
+      if (res.data && res.data.title) setAbout(res.data);
     } catch (err) {
-      console.log('Using fallback about content');
+      console.log('Using default about content');
     }
   };
 

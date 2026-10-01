@@ -3,18 +3,20 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SEO from '../components/SEO';
 import { ArrowRight, Search } from 'lucide-react';
+import { defaultProjects } from '../data/defaultContent';
 
 export default function Projects() {
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
-  const [projects, setProjects] = useState([]);
-  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [projects, setProjects] = useState(defaultProjects);
+  const [filteredProjects, setFilteredProjects] = useState(defaultProjects);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTech, setSelectedTech] = useState(null);
-  const [allTechs, setAllTechs] = useState([]);
+  const [allTechs, setAllTechs] = useState(() => [
+    ...new Set(defaultProjects.flatMap((p) => p.technologies || []))
+  ]);
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-
 
   useEffect(() => {
     fetchProjects();
@@ -23,14 +25,14 @@ export default function Projects() {
   const fetchProjects = async () => {
     try {
       const res = await axios.get(`${API_URL}/api/content/projects`);
-      const data = Array.isArray(res.data) ? res.data : [];
-      setProjects(data);
-      setFilteredProjects(data);
-
-      const techs = [...new Set(data.flatMap(p => p.technologies || []))];
-      setAllTechs(techs);
+      if (Array.isArray(res.data) && res.data.length > 0) {
+        setProjects(res.data);
+        setFilteredProjects(res.data);
+        const techs = [...new Set(res.data.flatMap((p) => p.technologies || []))];
+        setAllTechs(techs);
+      }
     } catch (err) {
-      console.error('Error fetching projects', err);
+      console.log('Using default projects content');
     }
   };
 
