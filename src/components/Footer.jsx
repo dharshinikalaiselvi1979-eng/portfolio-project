@@ -11,7 +11,7 @@ export default function Footer() {
         </Link>
         <p>&copy; {new Date().getFullYear()} dharshini.dev. Built with passion and precision.</p>
         <a
-          href={process.env.REACT_APP_ADMIN_URL || 'http://localhost:3001'}
+          href={process.env.REACT_APP_ADMIN_URL || 'https://admin-panel-portfolio-chi.vercel.app'}
           target="_blank"
           rel="noreferrer"
           className="text-xs text-purple-400 hover:text-purple-300 font-medium transition flex items-center gap-1"

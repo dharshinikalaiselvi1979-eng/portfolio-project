@@ -55,14 +55,14 @@ export default function Navbar() {
         <div className="flex items-center space-x-3">
           {/* Admin CMS Portal Link */}
           <a
-            href={process.env.REACT_APP_ADMIN_URL || 'http://localhost:3001'}
+            href={process.env.REACT_APP_ADMIN_URL || 'https://admin-panel-portfolio-chi.vercel.app'}
             target="_blank"
             rel="noreferrer"
             className="text-xs font-semibold px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:opacity-90 shadow-sm transition flex items-center gap-1.5"
             title="Open Custom CMS Admin Panel"
           >
             <span>⚡</span>
-            <span className="hidden sm:inline">Admin CMS</span>
+            <span>Admin CMS</span>
           </a>
 
           {/* Theme Toggle */}
@@ -98,6 +98,15 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <a
+              href={process.env.REACT_APP_ADMIN_URL || 'https://admin-panel-portfolio-chi.vercel.app'}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-purple-400 font-semibold transition-colors flex items-center gap-1.5"
+            >
+              <span>⚡</span> Admin CMS Portal
+            </a>
           </div>
         </div>
       )}
