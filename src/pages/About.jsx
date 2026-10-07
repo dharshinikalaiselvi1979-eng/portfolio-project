@@ -4,12 +4,13 @@ import axios from 'axios';
 import SocialLinks from '../components/SocialLinks';
 import { defaultAbout } from '../data/defaultContent';
 
+import { API_URL } from '../utils/config';
+
 export default function About() {
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
   const [about, setAbout] = useState(defaultAbout);
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     fetchAbout();

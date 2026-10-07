@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { TextSkeleton } from '../components/Skeleton';
 
+import { API_URL } from '../utils/config';
+
 export default function Blog() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     fetchBlogs();

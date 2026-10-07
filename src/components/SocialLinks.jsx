@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../utils/config';
 
 export default function SocialLinks({ isDark = false }) {
   const [social, setSocial] = useState({});
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     axios.get(`${API_URL}/api/content/about`)

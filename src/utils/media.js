@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+import { API_URL } from './config';
 
 // Uploaded images are stored as "/uploads/xyz.webp" on the backend.
 // Prefix them with the API origin; leave absolute URLs untouched.

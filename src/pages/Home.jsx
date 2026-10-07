@@ -11,6 +11,8 @@ import {
   defaultTestimonials
 } from '../data/defaultContent';
 
+import { API_URL } from '../utils/config';
+
 export default function Home() {
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
@@ -20,7 +22,6 @@ export default function Home() {
   const [services, setServices] = useState(defaultServices);
   const [testimonials, setTestimonials] = useState(defaultTestimonials);
   const [loading, setLoading] = useState(false);
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const handleThemeChange = () => {

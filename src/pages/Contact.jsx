@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { CheckCircle, AlertCircle } from 'lucide-react';
 
+import { API_URL } from '../utils/config';
+
 export default function Contact() {
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
@@ -10,7 +12,6 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

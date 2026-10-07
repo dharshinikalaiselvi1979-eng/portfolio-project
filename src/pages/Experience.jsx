@@ -4,10 +4,11 @@ import SEO from '../components/SEO';
 import { defaultExperience } from '../data/defaultContent';
 import { Briefcase, Calendar, Award } from 'lucide-react';
 
+import { API_URL } from '../utils/config';
+
 export default function Experience() {
   const [items, setItems] = useState(defaultExperience);
   const [loading, setLoading] = useState(false);
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     axios

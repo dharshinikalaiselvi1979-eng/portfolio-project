@@ -3,6 +3,7 @@ import axios from 'axios';
 import SEO from '../components/SEO';
 import { CardSkeleton } from '../components/Skeleton';
 import { defaultSkills } from '../data/defaultContent';
+import { API_URL } from '../utils/config';
 
 const groupSkills = (list) => {
   const grouped = {};
@@ -18,7 +19,6 @@ export default function Skills() {
   const [skills, setSkills] = useState(defaultSkills);
   const [categories, setCategories] = useState(() => groupSkills(defaultSkills));
   const [loading, setLoading] = useState(false);
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     fetchSkills();

@@ -4,6 +4,7 @@ import axios from 'axios';
 import SEO from '../components/SEO';
 import { ArrowRight, Search } from 'lucide-react';
 import { defaultProjects } from '../data/defaultContent';
+import { API_URL } from '../utils/config';
 
 export default function Projects() {
   const [isDark, setIsDark] = useState(() => {
@@ -16,7 +17,6 @@ export default function Projects() {
   const [allTechs, setAllTechs] = useState(() => [
     ...new Set(defaultProjects.flatMap((p) => p.technologies || []))
   ]);
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     fetchProjects();
